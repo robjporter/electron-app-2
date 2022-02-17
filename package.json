@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-typescript",
+  "name": "electron-app-2",
   "author": "roporter",
   "version": "0.0.1",
   "description": "An Electron boilerplate including TypeScript, React, Jest and ESLint.",
@@ -67,62 +67,6 @@
     "wait-on": "6.0.1"
   },
   "config": {
-    "forge": {
-      "packagerConfig": {
-        "name": "Electron starter",
-        "executableName": "electron-starter",
-        "icon": "assets/icon",
-        "extraResource": [
-          "assets"
-        ]
-      },
-      "plugins": [
-        [
-          "@electron-forge/plugin-webpack",
-          {
-            "mainConfig": "./webpack/main.webpack.js",
-            "renderer": {
-              "config": "./webpack/renderer.webpack.js",
-              "entryPoints": [
-                {
-                  "html": "./public/index.html",
-                  "js": "./src/index.tsx",
-                  "name": "main_window",
-                  "preload": {
-                    "js": "./electron/bridge.ts"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      ],
-      "makers": [
-        {
-          "name": "@electron-forge/maker-squirrel",
-          "config": {
-            "name": "Electron Starter"
-          }
-        },
-        {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
-        },
-        {
-          "name": "@electron-forge/maker-deb",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-rpm",
-          "config": {}
-        },
-        {
-          "name": "@electron-forge/maker-dmg",
-          "config": {}
-        }
-      ]
-    }
+    "forge": "./.config/forge.config.js"
   }
 }
