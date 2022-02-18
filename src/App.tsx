@@ -11,8 +11,11 @@ import { color, detectDeviceType, isBrowser, stringNormalise } from './utils'
 
 export function App() {
   function handleSayHello() {
-    window.Main.sendMessage('Hello World')
+    window.Main.sendMessage('HELLO')
     console.log(color.red('Message sent! Check main process log in terminal.'))
+  }
+  function handleSayHello2() {
+    window.Main.sendMessage('TEST')
   }
 
   return (
@@ -31,7 +34,10 @@ export function App() {
           <Text>{detectDeviceType()}</Text>
           <Text>{isBrowser()}</Text>
           <Button colorScheme={'brand'} onClick={handleSayHello}>
-            Send message to main process
+            Send message 1
+          </Button>
+          <Button colorScheme={'brand'} onClick={handleSayHello2}>
+            Send message 2
           </Button>
         </VStack>
       </Center>

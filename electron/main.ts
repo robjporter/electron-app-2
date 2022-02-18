@@ -37,8 +37,11 @@ async function registerListeners () {
   /**
    * This comes from bridge integration, check bridge.ts
    */
-  ipcMain.on('message', (_, message) => {
-    console.log(color.red(message));
+  ipcMain.on('hello', (_, message) => {
+    console.log(color.red("MAIN: ",message));
+  })
+  ipcMain.on('test', (_, message) => {
+    console.log(color.red("TEST: ",message));
   })
 }
 

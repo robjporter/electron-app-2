@@ -10,7 +10,16 @@ export const api = {
    */
 
   sendMessage: (message: string) => {
-    ipcRenderer.send('message', message)
+    switch (message) {
+      case "TEST":
+        ipcRenderer.send("test", message);
+        break;
+      case "HELLO":
+        ipcRenderer.send('hello', message);
+        break;
+      default:
+        console.log("RECEIVED UNKNOWN MESSAGE: ", message);
+    }
   },
 
   /**
