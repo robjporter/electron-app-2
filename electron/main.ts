@@ -1,5 +1,6 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
-const { session } = require('electron')
+import { app, BrowserWindow, ipcMain } from 'electron';
+const { session } = require('electron');
+import { color } from "../src/utils";
 
 let mainWindow: BrowserWindow | null
 
@@ -37,7 +38,7 @@ async function registerListeners () {
    * This comes from bridge integration, check bridge.ts
    */
   ipcMain.on('message', (_, message) => {
-    console.log(message)
+    console.log(color.red(message));
   })
 }
 

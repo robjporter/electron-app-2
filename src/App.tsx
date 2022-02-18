@@ -7,12 +7,12 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { theme } from './theme'
-import { norm } from './utils'
+import { color, detectDeviceType, isBrowser, stringNormalise } from './utils'
 
 export function App() {
   function handleSayHello() {
     window.Main.sendMessage('Hello World')
-    console.log('Message sent! Check main process log in terminal.')
+    console.log(color.red('Message sent! Check main process log in terminal.'))
   }
 
   return (
@@ -27,7 +27,9 @@ export function App() {
             An Electron boilerplate including TypeScript, React, Jest and
             ESLint.
           </Text>
-          <Text>{norm('Crème brulée')}</Text>
+          <Text>{stringNormalise('Crème brulée')}</Text>
+          <Text>{detectDeviceType()}</Text>
+          <Text>{isBrowser()}</Text>
           <Button colorScheme={'brand'} onClick={handleSayHello}>
             Send message to main process
           </Button>
