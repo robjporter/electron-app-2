@@ -1,14 +1,16 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
+const { session } = require('electron')
 
 let mainWindow: BrowserWindow | null
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string
-
 // const assetsPath =
 //   process.env.NODE_ENV === 'production'
 //     ? process.resourcesPath
 //     : app.getAppPath()
+
+
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -39,8 +41,20 @@ async function registerListeners () {
   })
 }
 
+async function registerSession() {
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+  callback({
+    responseHeaders: {
+      ...details.responseHeaders,
+      'Content-Security-Policy': ['img-src \'self\' https://www.vectorlogo.zone/;script-src \'self\' \'unsafe-inline\' \'unsafe-eval\'; object-src \'self\';']
+    }
+  })
+})
+}
+
 app.on('ready', createWindow)
   .whenReady()
+  .then(registerSession)
   .then(registerListeners)
   .catch(e => console.error(e))
 

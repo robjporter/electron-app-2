@@ -1,14 +1,13 @@
-import { Greetings } from './components/Greetings'
 import {
   Button,
   Center,
   ChakraProvider,
-  Container,
   Image,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { theme } from './theme'
+import { norm } from './utils'
 
 export function App() {
   function handleSayHello() {
@@ -21,13 +20,14 @@ export function App() {
       <Center w="100vw" h="100vh">
         <VStack>
           <Image
-            src={'https://vectorified.com/images/icon-react-native-24.png'}
+            src={'https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg'}
             alt="ReactJS logo"
           />
           <Text>
             An Electron boilerplate including TypeScript, React, Jest and
             ESLint.
           </Text>
+          <Text>{norm('Crème brulée')}</Text>
           <Button colorScheme={'brand'} onClick={handleSayHello}>
             Send message to main process
           </Button>
