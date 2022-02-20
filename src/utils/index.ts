@@ -1,3 +1,5 @@
+export * from "./strings";
+
 export type Func<T = any> = (...args: T[]) => any;
 export type StringMap<T = string> = { [key: string]: T };
 type ConstructorType<T = any> = new (...args: any[]) => T;
@@ -11,29 +13,16 @@ export const booleanAnd = <T = any>(a: T, b: T) => Boolean(a) && Boolean(b);
 export const arrayCast = (val: any): any[] => Array.isArray(val) ? val : [val];
 export const arrayChunk = (arr: any[], size: number) => Array.from({ length: Math.ceil(arr.length / size) }, (_: any, i: number) => arr.slice(i * size, i * size + size));
 export function arrayFlatten<U>(source: U[][]): U[] { return (<U[]>[]).concat(...source); } 
-export const arrayMerge = (...args) => args.reduce((a, b) => a.map((v, i) => ({ ...v, ...b[i] })));
+export const arrayMerge = (...args:any[]) => args.reduce((a, b) => a.map((v:any, i:any) => ({ ...v, ...b[i] })));
 export const arrayFromCSV = (data: string, delimiter = ",", omitFirstRow = false) => data.slice(omitFirstRow ? data.indexOf("\n") + 1 : 0).split("\n").map((v) => v.split(delimiter));
 export const arrayToCSV = (arr: (string | number)[][], delimiter = ",") => arr.map((v) => v.map((x) => (typeof x === "string" ? `"${x.replace(/"/g, '""')}"` : x)).join(delimiter)).join("\n");
 export const uniqueBy = (arr: any[], fn: Predicate) =>arr.reduce((acc, v) => {if (!acc.some((x: any) => fn(v, x))) acc.push(v); return acc;}, []);
 export const arrayDeepFlatten = (arr: any[]): any[] => { if (typeof Array.prototype.flat !== "undefined") return arr.flat(Infinity); return [].concat(...arr.map((v: any) => (Array.isArray(v) ? arrayDeepFlatten(v) : v))); };
 export const arrayCountBy = <T = any>(arr: T[], fn: Func<T> | string) => {const mapper = typeof fn === "function" ? fn : (val: any) => val[fn];return arr.reduce((acc, val) => {const value = mapper(val);acc[value] = (acc[value] || 0) + 1;return acc;}, {} as any);};
 export const ArrayCountValues = <T = any>(arr: T[], val: T) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
-export const numberAverage = <T extends number>(...nums: number[]) => nums.reduce((acc, val) => acc + val, 0) / nums.length;
-
 
 export const numberRandom = (min:number, max:number) => Math.floor(Math.random() * (max - min + 1)) + min;
   
-export const stringCapitalize = (str: string = "", lowerRest = false): string => str.slice(0, 1).toUpperCase() + (lowerRest ? str.slice(1).toLowerCase() : str.slice(1));
-export const stringCapitalizeEveryWord = (str = "") => str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
-export const stringContains = (s1: string, s2: string = "") => s1.toLowerCase().indexOf(s2.toLowerCase()) !== -1;
-export const stringNormalise = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-export const stringRemoveWhitespace = (str: string) => str.replace(/\s{2,}/g, " ");
-export const stringTruncate = (str: string, num: number = str.length, ellipsisStr = "...") => str.length >= num ? str.slice(0, num >= ellipsisStr.length ? num - ellipsisStr.length : num) + ellipsisStr : str;
-export function isString<T = any>(str: string | T): str is string {return typeof str === "string";}
-export const stringPad = (str: string, length: number, char = " ") => str.padStart((str.length + length) / 2, char).padEnd(length, char);
-export const stringRemoveNonASCII = (str:string) => str.replace(/[^\x20-\x7E]/g, "");  
-export const stringReverse = (str:string) => [...str].reverse().join("");
-export const stringStripHTMLTags = (str:string) => str.replace(/<[^>]*>/g, "");
 
 
 export const celsiusToFahrenheit = (degrees: number) => 1.8 * degrees + 32;
@@ -56,6 +45,7 @@ export const objectGet = (from: any, selector: string, defaultValue: any = undef
 export const objectGetAll = (from: any, ...selectors: string[]) =>[...selectors].map((s) => objectGet(from, s));
 
 export const size = (val: any) => Array.isArray(val) ? val.length : val && typeof val === "object" ? val.size || val.length || Object.keys(val).length : typeof val === "string" ? new Blob([val]).size : 0;
+export function isString<T = any>(str: string | T): str is string {return typeof str === "string";}
 
 export const isUndefined = (val:any) => val === undefined;
 export const is = (type: ConstructorType | string, val: any) => ![, null].includes(val) && (isString(type) ? val.constructor.name === type : val.constructor === type);
@@ -76,7 +66,6 @@ export const mask = (cc: number | string, num = 4, mask = "*") => String(cc).sli
 
 export const toCurrency = (n: number, curr: string, LanguageFormat: string = "") => Intl.NumberFormat(LanguageFormat, {style: "currency",currency: curr,}).format(n);
 
-export const toOrdinalSuffix = (num:number) => {const int = parseInt(num), digits = [int % 10, int % 100], ordinals = ["st", "nd", "rd", "th"], oPattern = [1, 2, 3, 4], tPattern = [11, 12, 13, 14, 15, 16, 17, 18, 19]; return oPattern.includes(digits[0]) && !tPattern.includes(digits[1]) ? int + ordinals[digits[0] - 1] : int + ordinals[3];};
 
 export const numberToSafeInteger = (num:number) => Math.round(Math.max(Math.min(num, Number.MAX_SAFE_INTEGER), Number.MIN_SAFE_INTEGER));
 

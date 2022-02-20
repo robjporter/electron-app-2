@@ -1,0 +1,12 @@
+export const stringCapitalize = (str: string = "", lowerRest = false): string => str.slice(0, 1).toUpperCase() + (lowerRest ? str.slice(1).toLowerCase() : str.slice(1));
+export const stringCapitalizeEveryWord = (str = "") => str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
+export const stringContains = (s1: string, s2: string = "") => s1.toLowerCase().indexOf(s2.toLowerCase()) !== -1;
+export const stringNormalise = (str: string) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+export const stringRemoveWhitespace = (str: string) => str.replace(/\s{2,}/g, " ");
+export const stringTruncate = (str: string, num: number = str.length, ellipsisStr = "...") => str.length >= num ? str.slice(0, num >= ellipsisStr.length ? num - ellipsisStr.length : num) + ellipsisStr : str;
+export const stringPad = (str: string, length: number, char = " ") => str.padStart((str.length + length) / 2, char).padEnd(length, char);
+export const stringPadStart = (str: string, length: number, char = " ") => str.padStart(length, char);
+export const stringPadEnd = (str: string, length: number, char = " ") => str.padEnd(length, char);
+export const stringRemoveNonASCII = (str:string) => str.replace(/[^\u00BF-\u1FFF^\u2C00-\uD7FF\w]/g, "");  
+export const stringReverse = (str:string) => [...str].reverse().join("");
+export const stringStripHTMLTags = (str:string) => str.replace(/<[^>]*>/g, "");
