@@ -1,4 +1,6 @@
 export * from "./strings";
+export * from "./conversion";
+export * from "./numbers";
 
 export type Func<T = any> = (...args: T[]) => any;
 export type StringMap<T = string> = { [key: string]: T };
