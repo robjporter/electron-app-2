@@ -13,7 +13,6 @@ module.exports = {
 
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
-
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
 
@@ -126,7 +125,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: ['./tests/setupTests.ts'],
+  setupFilesAfterEnv: ['./tests/setupTests.ts','jest-extended/all'],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
@@ -185,4 +184,5 @@ module.exports = {
 
   // Whether to use watchman for file crawling
   // watchman: true,
-}
+
+};

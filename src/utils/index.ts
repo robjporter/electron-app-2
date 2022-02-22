@@ -21,20 +21,12 @@ export const arrayDeepFlatten = (arr: any[]): any[] => { if (typeof Array.protot
 export const arrayCountBy = <T = any>(arr: T[], fn: Func<T> | string) => {const mapper = typeof fn === "function" ? fn : (val: any) => val[fn];return arr.reduce((acc, val) => {const value = mapper(val);acc[value] = (acc[value] || 0) + 1;return acc;}, {} as any);};
 export const ArrayCountValues = <T = any>(arr: T[], val: T) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 
-export const numberRandom = (min:number, max:number) => Math.floor(Math.random() * (max - min + 1)) + min;
-  
 
 
-export const celsiusToFahrenheit = (degrees: number) => 1.8 * degrees + 32;
-export const fahrenheitToCelsius = (degrees: number) => ((degrees - 32) * 5) / 9;
 
-export const either = (f: Function, g: Function) => (...args: any[]) => f(...args) || g(...args);
+
 export const not = (a: any) => !a;
 export const or = (a:any, b:any) => a || b;
-
-export const isEven = (num: number) => num % 2 === 0;
-export const isPositive = (num: number) => num > 0;
-export const isPositiveOrEven = either(isPositive, isEven);
 
 export function isValidDate(date: Date) {return date instanceof Date && !isNaN(date.getTime());}
 export const dayOfYear = (date: Date | string): number => {if (isString<Date>(date)) {date = new Date(date);}if (!isValidDate(date)) throw new Error(`Invalid Date string`);return Math.floor((date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) /1000 /60 /60 /24);};
@@ -66,8 +58,6 @@ export const mask = (cc: number | string, num = 4, mask = "*") => String(cc).sli
 
 export const toCurrency = (n: number, curr: string, LanguageFormat: string = "") => Intl.NumberFormat(LanguageFormat, {style: "currency",currency: curr,}).format(n);
 
-
-export const numberToSafeInteger = (num:number) => Math.round(Math.max(Math.min(num, Number.MAX_SAFE_INTEGER), Number.MIN_SAFE_INTEGER));
 
 export const UUIDGeneratorBrowser = () => (String(1e7) + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c: string) => ( Number(c) ^(crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (Number(c) / 4)))).toString(16));
 

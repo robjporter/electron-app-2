@@ -19,5 +19,6 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "allowJs": true
-  }
+  },
+  "files": ["global.d.ts"]
 }
