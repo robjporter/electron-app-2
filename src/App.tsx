@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react'
 import { theme } from './theme'
 import { color, detectDeviceType, isBrowser, stringNormalise } from './utils'
+import ld from 'lodash'
 
 export function App() {
   function handleSayHello() {
@@ -33,6 +34,7 @@ export function App() {
           <Text>{stringNormalise('Crème brulée')}</Text>
           <Text>{detectDeviceType()}</Text>
           <Text>{isBrowser()}</Text>
+          <Text>{ld.join(['Hello', 'World', 'From', 'React'], ' ')}</Text>
           <Button colorScheme={'brand'} onClick={handleSayHello}>
             Send message 1
           </Button>
